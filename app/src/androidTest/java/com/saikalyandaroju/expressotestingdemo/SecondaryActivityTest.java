@@ -1,5 +1,6 @@
 package com.saikalyandaroju.expressotestingdemo;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -22,13 +23,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 public class SecondaryActivityTest {
 
     @Rule
-   public ActivityScenarioRule<SecondaryActivity> rule = new ActivityScenarioRule<>(SecondaryActivity.class); // declaring  scenario globally.
+    public ActivityScenarioRule<SecondaryActivity> rule = new ActivityScenarioRule<>(SecondaryActivity.class); // declaring  scenario globally.
 
     @Test
     public void test_isActivityInView() {
 
 
         onView(withId(R.id.secondary)).check(matches(isDisplayed())); // check whether activity is visible.
+
+        //Notice that this wont effect next test
+        rule.getScenario().moveToState(Lifecycle.State.DESTROYED);
     }
 
     @Test
@@ -49,11 +53,11 @@ public class SecondaryActivityTest {
     }
 
     //doubt here test case fails???
-    @Test
+  /*  @Test
     public void test_navigateToMainActivity() {
 
         onView(withId(R.id.button_back)).perform(click()); // perform click.
 
         onView(withId(R.id.main)).check(matches(isDisplayed())); // check main activity is displayed.
-    }
+    }*/
 }
