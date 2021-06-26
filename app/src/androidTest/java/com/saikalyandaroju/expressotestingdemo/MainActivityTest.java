@@ -48,7 +48,7 @@ public class MainActivityTest {
 
         onView(withId(R.id.text_name)).check(matches(withText(Expecetd_Name)));
 
-
+       onView(withText("Toast Displayed "+Expecetd_Name)).inRoot(new ToastMatcher()).check(matches(isDisplayed()));
 
     }
 }

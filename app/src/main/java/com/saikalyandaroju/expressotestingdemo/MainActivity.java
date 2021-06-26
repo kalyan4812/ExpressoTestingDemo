@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,11 +59,18 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 setView(name.getText().toString());
+
                 dialog.dismiss();
+                showToast(name.getText().toString());
             }
         });
         dialog.show();
     }
+
+    private void showToast(String toString) {
+        Toast.makeText(this, "Toast Displayed "+toString,Toast.LENGTH_SHORT).show();
+    }
+
 
     private void setView(String toString) {
         textView.setText(toString);
