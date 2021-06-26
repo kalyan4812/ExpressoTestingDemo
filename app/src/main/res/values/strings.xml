@@ -17,4 +17,7 @@
     <string name="text_star_actors">Star Actors:</string>
     <string name="text_select_image_from_gallery">Select Image From Gallery</string>
     <string name="launch_camera">Launch Camera</string>
+    <string name="text_launch_dialog">Launch Dilaog</string>
+    <string name="name">Name</string>
+    <string name="button">Button</string>
 </resources>

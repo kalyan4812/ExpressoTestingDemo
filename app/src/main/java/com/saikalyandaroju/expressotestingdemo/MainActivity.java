@@ -1,55 +1,72 @@
 package com.saikalyandaroju.expressotestingdemo;
 
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.afollestad.materialdialogs.DialogBehavior;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.MaterialDialogKt;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.dialog.MaterialDialogs;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 public class MainActivity extends AppCompatActivity {
 
 
-    private static final int REQUEST_IMAGE_CAPTURE =1234;
-    public static final String KEY_IMAGE_DATA = "data";
 
-    TextView pickImage;
-    ImageView image;
+    TextView textView;
+    Button openDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pickImage=findViewById(R.id.button_launch_camera);
-        image=findViewById(R.id.image);
-        pickImage.setOnClickListener(new View.OnClickListener() {
+        textView=findViewById(R.id.text_name);
+        openDialog=findViewById(R.id.button_launch_dialog);
+        openDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              dispatchTakePictureIntent();
+                showMyDialog();
             }
         });
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } catch (ActivityNotFoundException e) {
-            // display error state to the user
-        }
+    private void showMyDialog() {
+
+        Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.custom_dilaog);
+        EditText name=dialog.findViewById(R.id.editTextTextPersonName);
+        Button button=dialog.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(name.getText().toString().isEmpty()){
+                    return;
+                }
+                setView(name.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            image.setImageBitmap(imageBitmap);
-        }
+    private void setView(String toString) {
+        textView.setText(toString);
     }
+
+
 }
