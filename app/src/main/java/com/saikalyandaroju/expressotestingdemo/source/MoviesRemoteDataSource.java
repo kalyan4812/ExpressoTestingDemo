@@ -1,23 +1,34 @@
 package com.saikalyandaroju.expressotestingdemo.source;
 
+import com.saikalyandaroju.expressotestingdemo.model.DummyMovies;
 import com.saikalyandaroju.expressotestingdemo.model.Movie;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static com.saikalyandaroju.expressotestingdemo.model.DummyMovies.provideMovies;
 
-public class MoviesRemoteDataSource  {
+public class MoviesRemoteDataSource implements MoviesDataSource  {
 
-    public static   LinkedHashMap<Integer, Movie> MOVIES_REMOTE_DATA = new LinkedHashMap<Integer, Movie>(2);
+    public    LinkedHashMap<Integer, Movie> MOVIES_REMOTE_DATA = new LinkedHashMap<Integer, Movie>(DummyMovies.provideMovies().size());
 
     public MoviesRemoteDataSource() {
-        MOVIES_REMOTE_DATA.put(provideMovies().get(0).getId(), provideMovies().get(0));
-        MOVIES_REMOTE_DATA.put(provideMovies().get(1).getId(), provideMovies().get(1));
+        for(Movie movie:DummyMovies.provideMovies()){
+            MOVIES_REMOTE_DATA.put(movie.getId(), movie);
+        }
+
+
 
     }
 
    // @Override
-    public static Movie getMovie(int movieId) {
+    public  Movie getMovie(int movieId) {
         return MOVIES_REMOTE_DATA.get(movieId);
+    }
+
+    @Override
+    public List<Movie> getMovies() {
+        return new ArrayList<>(MOVIES_REMOTE_DATA.values());
     }
 }

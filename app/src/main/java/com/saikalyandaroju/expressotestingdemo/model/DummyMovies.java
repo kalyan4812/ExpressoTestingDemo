@@ -50,6 +50,7 @@ public class DummyMovies {
         );
         movies.add(m1);
         movies.add(m2);
+
         return movies;
 
     }

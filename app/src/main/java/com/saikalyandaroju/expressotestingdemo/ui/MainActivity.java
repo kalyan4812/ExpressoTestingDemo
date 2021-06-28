@@ -4,19 +4,42 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.saikalyandaroju.expressotestingdemo.R;
 import com.saikalyandaroju.expressotestingdemo.factory.MovieFragmentFactory;
+import com.saikalyandaroju.expressotestingdemo.source.MoviesDataSource;
+import com.saikalyandaroju.expressotestingdemo.source.MoviesRemoteDataSource;
 
 public class MainActivity extends AppCompatActivity {
-
+    // dependencies (typically would be injected with dagger)
+    MoviesDataSource moviesRemoteDataSource;
+    RequestOptions requestOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        initDependencies();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().setFragmentFactory(new MovieFragmentFactory());
+
 
         init();
+
+    }
+
+    private void initDependencies() {
+        // glide
+        if (requestOptions == null) {
+            requestOptions = RequestOptions
+                    .placeholderOf(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background);
+        }
+        // Data Source
+        if (moviesRemoteDataSource == null) {
+            moviesRemoteDataSource = new MoviesRemoteDataSource();
+        }
+
+        getSupportFragmentManager().setFragmentFactory(new MovieFragmentFactory(requestOptions, moviesRemoteDataSource));
 
     }
 
@@ -26,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt("movie_id", movieId);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MovieDetailFragment.class, bundle)
+                    .replace(R.id.container,
+                            MovieDetailFragment.class, bundle)
                     .commit();
         }
     }

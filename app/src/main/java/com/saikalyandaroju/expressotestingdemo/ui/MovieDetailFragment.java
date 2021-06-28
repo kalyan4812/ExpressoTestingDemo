@@ -14,16 +14,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.saikalyandaroju.expressotestingdemo.R;
 import com.saikalyandaroju.expressotestingdemo.model.Movie;
+import com.saikalyandaroju.expressotestingdemo.source.MoviesDataSource;
 import com.saikalyandaroju.expressotestingdemo.source.MoviesRemoteDataSource;
 
 
 public class MovieDetailFragment extends Fragment {
 
+    private final RequestOptions requestOptions;
+    private final MoviesDataSource moviesRemoteDataSource;
     private Movie movie;
     TextView moviedir, movieactors, movieTitle, movieDescription;
     ImageView imageView;
+
+
+    //now we can do constructor injection.
+    public MovieDetailFragment(RequestOptions requestOptions, MoviesDataSource moviesRemoteDataSource) {
+        this.requestOptions = requestOptions;
+        this.moviesRemoteDataSource = moviesRemoteDataSource;
+    }
+    
+
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +68,7 @@ public class MovieDetailFragment extends Fragment {
         movieTitle = view.findViewById(R.id.movie_title);
         movieDescription = view.findViewById(R.id.movie_description);
         setMovieDetails(view);
-        Log.i("size",movie.getDirectors()+"");
+        Log.i("size", movie.getDirectors() + "");
         moviedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
