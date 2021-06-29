@@ -1,12 +1,16 @@
 package com.saikalyandaroju.expressotestingdemo.ui;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.saikalyandaroju.expressotestingdemo.R;
 import com.saikalyandaroju.expressotestingdemo.model.DummyMovies;
 import com.saikalyandaroju.expressotestingdemo.model.Movie;
+import com.saikalyandaroju.expressotestingdemo.util.ExpressoIdlingResource;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +33,16 @@ public class MovieListFragmentTest {
 
     int LIST_ITEM_IN_TEST = 3;
     Movie MOVIE_IN_TEST = DummyMovies.provideMovies().get(LIST_ITEM_IN_TEST);
+
+    @Before
+    public void registerIdlingResource() {
+        IdlingRegistry.getInstance().register(ExpressoIdlingResource.countingIdlingResource);
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(ExpressoIdlingResource.countingIdlingResource);
+    }
 
     @Test
     public void test_isListFragmentVisible_onAppLaunch() {
