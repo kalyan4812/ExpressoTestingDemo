@@ -8,6 +8,7 @@ import com.saikalyandaroju.expressotestingdemo.R;
 import com.saikalyandaroju.expressotestingdemo.model.DummyMovies;
 import com.saikalyandaroju.expressotestingdemo.model.Movie;
 import com.saikalyandaroju.expressotestingdemo.util.ExpressoIdlingResource;
+import com.saikalyandaroju.expressotestingdemo.util.ExpressoIdlingResourecRule;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,15 +39,8 @@ public class MovieListFragmentTest {
     int LIST_ITEM_IN_TEST = 3;
     Movie MOVIE_IN_TEST = DummyMovies.provideMovies().get(LIST_ITEM_IN_TEST);
 
-    @Before
-    public void registerIdlingResource() {
-        IdlingRegistry.getInstance().register(ExpressoIdlingResource.countingIdlingResource);
-    }
-
-    @After
-    public void unregisterIdlingResource() {
-        IdlingRegistry.getInstance().unregister(ExpressoIdlingResource.countingIdlingResource);
-    }
+    @Rule
+    public ExpressoIdlingResourecRule expressoIdlingResourecRule = new ExpressoIdlingResourecRule();
 
     @Test
     public void a_test_isListFragmentVisible_onAppLaunch() {
