@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentFactory;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.saikalyandaroju.expressotestingdemo.source.MovieListAdapter;
 import com.saikalyandaroju.expressotestingdemo.source.MoviesDataSource;
 import com.saikalyandaroju.expressotestingdemo.ui.DirectorsFragment;
 import com.saikalyandaroju.expressotestingdemo.ui.MovieDetailFragment;
+import com.saikalyandaroju.expressotestingdemo.ui.MovieListFragment;
 import com.saikalyandaroju.expressotestingdemo.ui.StarActorsFragment;
 
-public class MovieFragmentFactory extends FragmentFactory  {  //goal is to provide arguments to fragment constructor.
+public class MovieFragmentFactory extends FragmentFactory {  //goal is to provide arguments to fragment constructor.
 
     private final RequestOptions requestOptions;
     private final MoviesDataSource moviesRemoteDataSource;
@@ -30,6 +32,11 @@ public class MovieFragmentFactory extends FragmentFactory  {  //goal is to provi
         Fragment f = null;
         Log.i("check",className);
         switch (className) {
+
+            case "com.saikalyandaroju.expressotestingdemo.ui.MovieListFragment":
+                f = new MovieListFragment(moviesRemoteDataSource);
+                break;
+
             case "com.saikalyandaroju.expressotestingdemo.ui.DirectorsFragment":
                 f = new DirectorsFragment();
                 break;

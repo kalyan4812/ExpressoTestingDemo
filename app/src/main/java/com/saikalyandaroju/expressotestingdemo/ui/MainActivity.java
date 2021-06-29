@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             bundle.putInt("movie_id", movieId);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,
-                            MovieDetailFragment.class, bundle)
+                            MovieListFragment.class, bundle)
                     .commit();
         }
     }

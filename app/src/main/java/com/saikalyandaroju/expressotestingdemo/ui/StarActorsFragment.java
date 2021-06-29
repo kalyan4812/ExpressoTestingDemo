@@ -44,10 +44,10 @@ public class StarActorsFragment extends Fragment {
 
     private void setActors(View view) {
         TextView textView = (TextView) view.findViewById(R.id.star_actors_text);
-        textView.setText(stringBuilderForDirectors(starActors));
+        textView.setText(stringBuilderForActors(starActors));
     }
 
-    public static String stringBuilderForDirectors(ArrayList<String> starActors) {
+    public static String stringBuilderForActors(ArrayList<String> starActors) {
         Log.i("size",starActors.size()+"");
         StringBuilder sb = new StringBuilder();
         for (String director : starActors) {

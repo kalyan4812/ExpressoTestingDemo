@@ -40,7 +40,7 @@ public class StarActorsFragmentTest {
 
         onView(withId(R.id.star_actors_text))
                 .check(matches(withText(
-                        StarActorsFragment.stringBuilderForDirectors(actors)
+                        StarActorsFragment.stringBuilderForActors(actors)
                 )));
     }
 }

@@ -48,8 +48,30 @@ public class DummyMovies {
                         "for a legendary treasure.",
                m2dir,m2actor
         );
+        Movie m3 = new Movie(
+                2,
+                "Avengers: Infinity War",
+                "https://nyc3.digitaloceanspaces.com/open-api-spaces/open-api-static/blog/1/Infinity_War-infinity_war.png",
+                "The Avengers and their allies must be willing to sacrifice all in an attempt to " +
+                        "defeat the powerful Thanos before his blitz of devastation and ruin puts an end to " +
+                        "the universe.",
+                new ArrayList<String>(asList("alex", "brian", "charles")),
+                new ArrayList<String>(asList("alex", "brian", "charles"))
+        );
+
+        Movie m4 = new Movie(
+                3,
+                "The Rundown",
+                "https://nyc3.digitaloceanspaces.com/open-api-spaces/open-api-static/blog/1/The_Rundown-the_rundown.png",
+                "A tough aspiring chef is hired to bring home a mobster's son from the Amazon but " +
+                        "becomes involved in the fight against an oppressive town operator and the search " +
+                        "for a legendary treasure.",
+                m2dir,m2actor
+        );
         movies.add(m1);
         movies.add(m2);
+        movies.add(m3);
+        movies.add(m4);
 
         return movies;
 
