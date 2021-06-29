@@ -11,9 +11,11 @@ import com.saikalyandaroju.expressotestingdemo.util.ExpressoIdlingResource;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
@@ -24,6 +26,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) // if you want to run tests in alphabetical order.
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class MovieListFragmentTest {
 
@@ -45,7 +49,7 @@ public class MovieListFragmentTest {
     }
 
     @Test
-    public void test_isListFragmentVisible_onAppLaunch() {
+    public void a_test_isListFragmentVisible_onAppLaunch() {
 
         onView(withId(R.id.recycler_view)).check(matches(isDisplayed()));
     }

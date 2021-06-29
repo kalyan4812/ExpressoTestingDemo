@@ -83,17 +83,22 @@ public class MovieListFragment extends Fragment implements MovieListAdapter.Inte
             public void run() {
                 try {
                     Thread.sleep(1500L);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
 
+
             }
         });
+        ExpressoIdlingResource.decrement(); // once it decrements expresso continues test cases.
         moviesList.clear();
         moviesList.addAll(moviesDataSource.getMovies());
+
         movieListAdapter.notifyDataSetChanged();
-        ExpressoIdlingResource.decrement(); // once it decrements expresso continues test cases.
+
+
     }
 
 
